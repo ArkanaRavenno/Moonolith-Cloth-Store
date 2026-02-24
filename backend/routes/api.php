@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\User\ChatController;
 use App\Http\Controllers\Api\Admin\CartController;
 use App\Http\Controllers\Api\Admin\ItemController;
 use App\Http\Controllers\Api\Admin\AdminController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Api\User\FavoriteController;
 use App\Http\Controllers\Api\Admin\CashflowController;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Public\MostBuyController;
+use App\Http\Controllers\Api\Admin\AdminChatController;
 use App\Http\Controllers\Api\Admin\DashboardController;
 use App\Http\Controllers\Api\Admin\FlashSaleController;
 use App\Http\Controllers\Api\MidtransWebhookController;
@@ -57,6 +59,9 @@ Route::middleware(['api', 'auth:sanctum', 'role:admin,super'])->prefix('admin')-
     Route::patch('/orders/{order}/status', [OrderController::class, 'updateStatus']);
     Route::get('/cashflow', [CashflowController::class, 'cashflow']);
     Route::get('/orders/report', [OrderController::class, 'exportReport']);
+    Route::get('/chat/rooms', [AdminChatController::class, 'rooms']);
+    Route::get('/chat/{id}/messages', [AdminChatController::class, 'messages']);
+    Route::post('/chat/send', [AdminChatController::class, 'send']);
 });
 
 Route::middleware(['api', 'auth:sanctum', 'role:user'])->prefix('user')->group(function () {
@@ -80,6 +85,9 @@ Route::middleware(['api', 'auth:sanctum', 'role:user'])->prefix('user')->group(f
     Route::post('/orders/{order}/cancel', [OrderController::class, 'cancel']);
     Route::get('/orders/{invoice}/pdf', [OrderController::class, 'downloadPdf']);
     Route::post('/reviews', [ReviewController::class, 'store']);
+    Route::get('/chat/room', [ChatController::class, 'getOrCreateChat']);
+    Route::get('/chat/{chatId}/messages', [ChatController::class, 'messages']);
+    Route::post('/chat/send', [ChatController::class, 'send']);
 });
 
 Route::prefix('public')->group(function () {

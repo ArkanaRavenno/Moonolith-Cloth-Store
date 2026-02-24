@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue';
-import { House, Server, User, DollarSign, Clipboard, LogOut, CircleUserRound, Menu, X, TriangleAlert } from 'lucide-vue-next';
+import { House, Server, User, DollarSign, Clipboard, LogOut, CircleUserRound, Menu, X, TriangleAlert, MessageSquare } from 'lucide-vue-next';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
 
@@ -77,6 +77,10 @@ const linkClass = (route) => {
             </router-link>
             <router-link :to="{ name: 'Riwayat' }" :class="linkClass('transaksi')">
                 <Clipboard class="w-5 h-5 mr-3" /> Riwayat Transaksi
+            </router-link>
+
+            <router-link :to="{ name: 'Chat' }" :class="linkClass('chat')">
+                <MessageSquare class="w-5 h-5 mr-3" /> Customer Service
             </router-link>
         </nav>
 

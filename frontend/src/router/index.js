@@ -30,6 +30,7 @@ import Cart from '@/views/user/Cart.vue'
 import Checkout from '@/views/user/Checkout.vue'
 import Catalog from '@/views/user/Catalog.vue'
 import Invoice from '@/views/user/Invoice.vue'
+import Chat from '@/views/admin/Chat.vue'
 
 const routes = [
   { path: '/', name: 'Home', component: Home},
@@ -69,6 +70,7 @@ const routes = [
   { path: '/checkout', name: 'Checkout', component: Checkout, meta: { requiresAuth: true, roles: ['user'] } },
   { path: '/invoice/:invoice', name: 'Invoice', component: Invoice, meta: { requiresAuth: true, roles: ['user'] } },
   { path: '/catalog', name: 'Catalog', component: Catalog },
+  { path: '/chat', name: 'Chat', component: Chat, meta: { requiresAuth: true, roles: ['admin', 'super'] } },
 ]
 
 const router = createRouter({
